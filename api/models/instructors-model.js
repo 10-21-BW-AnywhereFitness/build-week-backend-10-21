@@ -19,7 +19,14 @@ function getClasses(user_id){
         .orderBy('c.class_date', 'asc')
 }
 
-function getClass(){}
+async function getClass(user_id, class_id){
+    const allClasses = await getClasses(user_id);
+
+    const [oneClass] = allClasses.filter(c => {
+        return c.class_id === parseInt(class_id)
+    })
+    return oneClass;
+}
 
 function addClass(){}
 

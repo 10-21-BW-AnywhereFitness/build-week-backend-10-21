@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { restricted, only } = require('./../middleware/auth-middleware');
+const { checkClassId, checkClassExists, validateClass } = require('./../middleware/instructors-middleware'); 
 const Instructors = require('./../models/instructors-model');
 
 //[GET] /:user_id/classes
@@ -13,15 +14,21 @@ router.get('/:user_id/classes',restricted, only('instructor'), (req, res, next) 
 })
 
 //[GET] /:user_id/classes/:class_id
-router.get('/:user_id/classes/:class_id', restricted, only('instructor'), (req, res, next) => {})
+router.get('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, (req, res, next) => {
+    Instructors.getClass(req.params.user_id, req.params.class_id)
+        .then(oneClass => {
+            res.status(200).json(oneClass)
+        })
+        .catch(next)
+})
 
 //[POST] /classes/ (auth instructor)
 router.post('/classes', restricted, only('instructor'), (req, res, next) => {})
 
 //[PUT] /:user_id/classes/:class_id(auth_instructor)
-router.put('/:user_id/classes/:class_id', restricted, only('instructor'), (req, res, next) => {})
+router.put('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, (req, res, next) => {})
 
 //[DELETE] /:user_id/classes/:class_id (auth instructor)
-router.delete('/:user_id/classes/:class_id', restricted, only('instructor'), (req, res, next) => {})
+router.delete('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, (req, res, next) => {})
 
 module.exports = router;
