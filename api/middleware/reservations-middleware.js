@@ -43,8 +43,20 @@ async function onlyOnce(req, res, next) {
   }
 }
 
-function checkIfReservationExists(req, res, next){
-  
+async function checkIfReservationExists(req, res, next) {
+  const user_id = req.params.user_id;
+  const class_id = req.params.class_id;
+
+  const allReservations = await ClientClasses.getAllReservedClasses(user_id);
+
+  const [exists] = allReservations.filter((reso) => {
+    return reso.class_id === parseInt(class_id);
+  });
+  if (!exists) {
+    next({ status: 404, message: "That reservation doesn't exist" });
+  } else {
+    next();
+  }
 }
 
 module.exports = {
