@@ -15,7 +15,10 @@ router.get('/classes', restricted, (req, res, next) => {
 //[GET]/client/classes/:type || class_time || duration || intensity_level || class_location
 
 //[POST] /client/classes/:class_id
-router.post('/classes/:class_id', restricted, (req, res, next) => {})
+router.post('/classes/:class_id', restricted, only('client'), (req, res, next) => {
+    console.log('made it ')
+    // ClientClasses.createReservation()
+})
 
 //[DELETE] /client/classes/:class_id
 router.delete('/classes', restricted, (req, res, next) => {})
