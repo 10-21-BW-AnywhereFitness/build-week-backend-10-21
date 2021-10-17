@@ -53,7 +53,19 @@ const validateRoleType = (req, res, next) => {
     }
 }
 
-const checkPasswordCorrect = (req, res, next) => {}
+const checkPasswordCorrect = async (req, res, next) => {
+    let { username, password } = req.body;
+
+    const validUser = await Users.findBy({ username: username });
+
+    if(validUser && bcrypt.compareSync(password, validUser.password)) {
+        const token = tokenBuilder(validUser);
+        req.token = token;
+        next();
+    } else {
+        next({ status: 401, message: 'Invalid credentials' })
+    }
+}
 
 const hashThePassword = (req, res, next) => {
     const rounds = process.env.BCRYPT_ROUNDS || 8;

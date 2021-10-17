@@ -12,7 +12,7 @@ async function addUser({ username, password, role_id }){
 function findBy(filter){
     return db('users as u')
         .join('roles as r', 'r.role_id', 'u.role_id')
-        .select('u.user_id', 'u.username', 'r.role_type')
+        .select('u.user_id', 'u.username', 'r.role_type', 'u.password')
         .where(filter)
         .first()
 }

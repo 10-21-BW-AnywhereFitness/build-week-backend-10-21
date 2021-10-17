@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { checkUsernameExists, validateUsername, validatePassword, validateRoleType, hashThePassword } = require('./../middleware/auth-middleware');
+const { checkUsernameExists, validateUsername, validatePassword, validateRoleType, checkPasswordCorrect, hashThePassword } = require('./../middleware/auth-middleware');
 const Users = require('./../models/users-model'); 
 
 //[POST]  /register
-router.post('/register', validateUsername, validatePassword, validateRoleType, (req, res, next) => {
+router.post('/register', validateUsername, validatePassword, validateRoleType, hashThePassword, (req, res, next) => {
     Users.addUser(req.body)
         .then(newUser => {
             res.status(201).json(newUser);
@@ -13,11 +13,11 @@ router.post('/register', validateUsername, validatePassword, validateRoleType, (
 })
 
 //[POST]  /login
-router.post('/login', checkUsernameExists, (req, res, next) => {
+router.post('/login', checkUsernameExists, checkPasswordCorrect, (req, res, next) => {
     try {
         res.status(200).json({
             message: `Welcome back ${req.body.username}`,
-            // token: req.token,
+            token: req.token,
         })
     }
     catch(err){
