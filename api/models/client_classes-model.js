@@ -14,7 +14,12 @@ function getById(class_id){
         first();
 }
 
-function getAllReservedClasses(){}
+function getAllReservedClasses(user_id){
+    return db('reservations as r')
+        .join('classes as c', 'r.class_id', 'c.class_id')
+        .select('c.class_name', 'c.class_type', 'c.class_date', 'c.class_time')
+        .where('r.user_id', user_id)
+}
 
 async function createReservation(user_id, class_id){
     const newReservation = { user_id, class_id }
@@ -33,7 +38,9 @@ async function createReservation(user_id, class_id){
     .first()
 }
 
-function deleteReservation(){}
+function deleteReservation(user_id, class_id){
+
+}
 
 module.exports = {
     getAllClasses,

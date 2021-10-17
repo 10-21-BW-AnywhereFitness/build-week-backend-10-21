@@ -22,10 +22,24 @@ async function checkIfClassExists(req, res, next){
     } else {
         next();
     }
+}
+async function onlyOnce(req, res, next){
+    const class_id = parseInt(req.params.class_id);
+    const user_id = req.decodedToken.subject;
+    const userReservations = await db('reservations').where('user_id', user_id)
 
+    const duplicate = userReservations.filter(reso => {
+        return reso.class_id === class_id && reso.user_id === user_id
+    })
+    if(duplicate[0]){
+        next({ status: 401, message: 'You have already registered for this class' })
+    } else {
+        next();
+    }
 }
 
 module.exports = {
     checkIfFull,
     checkIfClassExists,
+    onlyOnce
 }
