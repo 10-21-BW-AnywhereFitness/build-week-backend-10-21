@@ -23,11 +23,14 @@ const restricted = (req, res, next) => {
 };
 
 const only = (role_type) => (req, res, next) => {
-    if(req.decodedToken.role_type === role_type){
-        next();
-    } else {
-        next({ status: 403, message: 'You do not have the correct permissions for that'})
-    }
+  if (req.decodedToken.role_type === role_type) {
+    next();
+  } else {
+    next({
+      status: 403,
+      message: "You do not have the correct permissions for that",
+    });
+  }
 };
 
 //validation middleware
