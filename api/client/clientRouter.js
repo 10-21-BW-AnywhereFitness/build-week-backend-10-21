@@ -59,7 +59,8 @@ router.get("/:user_id/classes", restricted, (req, res, next) => {
 router.get(
   "/:user_id/classes/:class_id",
   restricted,
-  checkIfClassExists, checkIfReservationExists,
+  checkIfClassExists,
+  checkIfReservationExists,
   (req, res, next) => {
     ClientClasses.getReservedClass(req.params.user_id, req.params.class_id)
       .then((oneClass) => {
@@ -73,7 +74,8 @@ router.get(
 router.delete(
   "/:user_id/classes/:class_id",
   restricted,
-  checkIfClassExists, checkIfReservationExists,
+  checkIfClassExists,
+  checkIfReservationExists,
   (req, res, next) => {
     try {
       ClientClasses.deleteReservation(req.params.user_id, req.params.class_id)
