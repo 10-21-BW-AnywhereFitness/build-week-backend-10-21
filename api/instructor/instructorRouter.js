@@ -4,7 +4,7 @@ const { restricted, only } = require('./../middleware/auth-middleware');
 const { checkClassId, checkClassExists, validateClass } = require('./../middleware/instructors-middleware'); 
 const Instructors = require('./../models/instructors-model');
 
-//[GET] /:user_id/classes
+//[GET] /api/instructor/:user_id/classes
 router.get('/:user_id/classes',restricted, only('instructor'), (req, res, next) => {
     Instructors.getClasses(req.params.user_id)
         .then(classes => {
@@ -13,7 +13,7 @@ router.get('/:user_id/classes',restricted, only('instructor'), (req, res, next) 
         .catch(next)
 })
 
-//[GET] /:user_id/classes/:class_id
+//[GET] /api/instructor/:user_id/classes/
 router.get('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, (req, res, next) => {
     Instructors.getClass(req.params.user_id, req.params.class_id)
         .then(oneClass => {
@@ -22,13 +22,19 @@ router.get('/:user_id/classes/:class_id', restricted, only('instructor'), checkC
         .catch(next)
 })
 
-//[POST] /classes/ (auth instructor)
-router.post('/classes', restricted, only('instructor'), (req, res, next) => {})
+//[POST] /api/instructor/:user_id/classes/ (auth instructor)
+router.post('/:user_id/classes', restricted, only('instructor'), validateClass, (req, res, next) => {
+    Instructors.addClass(req.body)
+        .then(resp => {
+            console.log('here!', resp)
+        })
+        .catch(next)
+})
 
-//[PUT] /:user_id/classes/:class_id(auth_instructor)
-router.put('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, (req, res, next) => {})
+//[PUT] /api/instructor/:user_id/classes/:class_id (auth_instructor)
+router.put('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, (req, res, next) => {})
 
-//[DELETE] /:user_id/classes/:class_id (auth instructor)
-router.delete('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, (req, res, next) => {})
+//[DELETE] /api/instructor/:user_id/classes/:class_id (auth instructor)
+router.delete('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, (req, res, next) => {})
 
 module.exports = router;

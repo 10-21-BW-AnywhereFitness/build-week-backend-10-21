@@ -1,4 +1,5 @@
 const db = require('./../data/db-config');
+const { validateClassSchema } = require('./../validation-schema/yup-class_validation');
 const Instructors = require('./../models/instructors-model');
 
 async function checkClassExists(req, res, next){
@@ -19,7 +20,18 @@ async function checkClassId(req, res, next){
     }
 }
 
-function validateClass(req, res, next){}
+async function validateClass(req, res, next){
+    try {
+        const validatedClass = await validateClassSchema.validate(req.body);
+        const validatedClassWithUserId = {... validatedClass, user_id: req.params.user_id}
+
+        req.body = validatedClassWithUserId;
+        next();
+    }
+    catch(err){
+        next(err);
+    }
+}
 
 
 module.exports = {

@@ -28,7 +28,22 @@ async function getClass(user_id, class_id){
     return oneClass;
 }
 
-function addClass(){}
+async function addClass(newClass){
+const [newClassObject] = await db('classes').insert(newClass, [
+'class_id',
+'class_name', 
+'class_type', 
+'class_date', 
+'class_time', 
+'class_duration', 
+'class_intensity', 
+'class_location', 
+'class_registered_clients', 
+'class_max'
+])
+
+console.log(newClassObject)
+}
 
 function updateClass(){}
 
