@@ -24,7 +24,7 @@ router.get('/:user_id/classes/:class_id', restricted, only('instructor'), checkC
 
 //[POST] /api/instructor/:user_id/classes/ (auth instructor)
 router.post('/:user_id/classes', restricted, only('instructor'), validateClass, (req, res, next) => {
-    Instructors.addClass(req.newBody)
+    Instructors.addClass(req.body)
         .then(newClass => {
             res.status(201).json(newClass)
         })
@@ -32,9 +32,17 @@ router.post('/:user_id/classes', restricted, only('instructor'), validateClass, 
 })
 
 //[PUT] /api/instructor/:user_id/classes/:class_id (auth_instructor)
-router.put('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, (req, res, next) => {})
+router.put('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, validateClass, (req, res, next) => {
+    Instructors.updateClass(req.params.class_id, req.body)
+        .then(updatedClass => {
+            res.status(200).json(updatedClass)
+        })
+        .catch(next)
+})
 
 //[DELETE] /api/instructor/:user_id/classes/:class_id (auth instructor)
-router.delete('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, (req, res, next) => {})
+router.delete('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, (req, res, next) => {
+    console.log('wut wut ')
+})
 
 module.exports = router;

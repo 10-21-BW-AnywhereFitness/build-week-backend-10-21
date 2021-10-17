@@ -46,7 +46,13 @@ async function addClass(newClass) {
   return newClassObject;
 }
 
-function updateClass() {}
+async function updateClass(class_id, update) {
+    await db('classes')
+        .update(update)
+        .where('class_id', class_id)
+
+    return getClass(update.user_id, class_id )
+}
 
 function deleteClass() {}
 

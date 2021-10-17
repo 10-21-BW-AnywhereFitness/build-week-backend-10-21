@@ -34,7 +34,7 @@ async function validateClass(req, res, next) {
       user_id: req.params.user_id,
     };
 
-    req.newBody = validatedClassWithUserId;
+    req.body = validatedClassWithUserId;
     next();
   } catch (err) {
     next(err);
