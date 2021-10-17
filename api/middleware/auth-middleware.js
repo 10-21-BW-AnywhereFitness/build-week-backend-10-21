@@ -1,12 +1,28 @@
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { JWT_SECRET } = require('./../secrets/index');
 const { tokenBuilder } = require('./../auth/tokenBuilder');
 const Users = require('./../models/users-model');
 
 //access middleware
-const restricted = (req, res, next) => {}
+const restricted = (req, res, next) => {
+    const token = req.headers.authorization;
 
-const only = (role_name) => (req, res, next) => {}
+    if(!token){
+        return next({ status: 401, message: 'Token required' })
+    }
+
+    jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+        if(err){
+            return next({ status: 401, message: 'Token invalid' });
+        } 
+
+        req.decodedToken = decodedToken;
+        return next();
+    })
+}
+
+const only = (role_type) => (req, res, next) => {}
 
 //validation middleware
 const checkUsernameExists = async (req, res, next) => {

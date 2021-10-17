@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-//[POST] /auth/classes/ (auth instructor)
+//[POST] /classes/ (auth instructor)
+router.post('/classes')
 
-//[PUT] /auth/classes/:class_id(auth_instructor)
+//[PUT] /classes/:class_id(auth_instructor)
+router.put('/classes/:class_id', (req, res, next) => {})
 
-//[DELETE] /auth/classes/:class_id (auth instructor)
+//[DELETE] /classes/:class_id (auth instructor)
+router.delete('/classes/:class_id', (req, res, next) => {})
 
 module.exports = router;
