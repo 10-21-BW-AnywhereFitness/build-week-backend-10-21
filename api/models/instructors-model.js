@@ -4,8 +4,8 @@ function getClasses(user_id) {
   return db("classes as c")
     .join("users as u", "c.user_id", "u.user_id")
     .select(
-      "c.class_id",
       "u.user_id",
+      "c.class_id",
       "c.class_name",
       "c.class_type",
       "c.class_date",
@@ -31,8 +31,8 @@ async function getClass(user_id, class_id) {
 
 async function addClass(newClass) {
   const [newClassObject] = await db("classes").insert(newClass, [
-    "class_id",
     "user_id",
+    "class_id",
     "class_name",
     "class_type",
     "class_date",
@@ -50,11 +50,16 @@ async function updateClass(class_id, update) {
     await db('classes')
         .update(update)
         .where('class_id', class_id)
-
     return getClass(update.user_id, class_id )
 }
 
-function deleteClass() {}
+async function deleteClass(user_id, class_id) {
+    // const classToDelete = await getClass(user_id, class_id);
+    
+    return db('classes')
+        .where('class_id', class_id)
+        .del()
+}
 
 module.exports = {
   getClasses,

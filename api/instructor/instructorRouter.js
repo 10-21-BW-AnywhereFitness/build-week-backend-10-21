@@ -42,7 +42,11 @@ router.put('/:user_id/classes/:class_id', restricted, only('instructor'), checkC
 
 //[DELETE] /api/instructor/:user_id/classes/:class_id (auth instructor)
 router.delete('/:user_id/classes/:class_id', restricted, only('instructor'), checkClassExists, checkClassId, (req, res, next) => {
-    console.log('wut wut ')
+    Instructors.deleteClass(req.params.user_id, req.params.class_id)
+        .then(() => {
+            res.status(200).json({ message: 'Class successfully deleted!'})
+        })
+        .catch(next)
 })
 
 module.exports = router;
