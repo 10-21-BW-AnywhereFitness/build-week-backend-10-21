@@ -4,7 +4,7 @@ const { checkUsernameExists, validateUsername, validatePassword, hashThePassword
 const Users = require('./../models/users-model'); 
 
 //[POST]  /register
-router.post('/register', validateUsername, (req, res, next) => {
+router.post('/register', validateUsername, validatePassword, (req, res, next) => {
     Users.addUser(req.body)
         .then(newUser => {
             res.status(201).json(newUser);

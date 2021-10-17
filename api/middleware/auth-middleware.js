@@ -31,7 +31,17 @@ const validateUsername = async (req, res, next) => {
     }
 }
 
-const validatePassword = (req, res, next) => {}
+const validatePassword = (req, res, next) => {
+    const { password } = req.body;
+
+    if(!password || password.trim().length < 1){
+        next({ status: 401, message: 'Password required'});
+    } else if(password.length < 5){
+        next({ status: 401, message: 'Password must be at least 5 chars' })
+    } else {
+        next();
+    }
+}
 
 const checkPasswordCorrect = (req, res, next) => {}
 
