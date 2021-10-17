@@ -24,9 +24,9 @@ router.get('/:user_id/classes/:class_id', restricted, only('instructor'), checkC
 
 //[POST] /api/instructor/:user_id/classes/ (auth instructor)
 router.post('/:user_id/classes', restricted, only('instructor'), validateClass, (req, res, next) => {
-    Instructors.addClass(req.body)
-        .then(resp => {
-            console.log('here!', resp)
+    Instructors.addClass(req.newBody)
+        .then(newClass => {
+            res.status(201).json(newClass)
         })
         .catch(next)
 })
