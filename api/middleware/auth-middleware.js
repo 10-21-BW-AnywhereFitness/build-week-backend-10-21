@@ -43,6 +43,16 @@ const validatePassword = (req, res, next) => {
     }
 }
 
+const validateRoleType = (req, res, next) => {
+    const role = req.body.role_id;
+    if(!role || role.trim().length < 1){
+        req.body.role_id = 'client'
+        next();
+    } else {
+        next();
+    }
+}
+
 const checkPasswordCorrect = (req, res, next) => {}
 
 const hashThePassword = (req, res, next) => {
@@ -59,6 +69,7 @@ module.exports = {
     checkUsernameExists,
     validateUsername,
     validatePassword,
+    validateRoleType,
     checkPasswordCorrect,
     hashThePassword
 }
