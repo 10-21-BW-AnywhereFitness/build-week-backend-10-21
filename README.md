@@ -1,11 +1,3 @@
-# Endpoints
-
-## Auth Endpoints
-### [POST]  /api/auth/register
-### [POST]  /api/auth/login
-
-## Client Endpoints
-### [GET] /api/client/classes 
 ### [GET] /api/client/classes/:class_id
 ### [POST] /api/client/classes/
 ### [GET] /api/client/:user_id/classes
@@ -75,8 +67,6 @@ role_id will be converted to actual id number, and only client or instructor wil
 ```JSON
 {
     "message": "Welcome back username",
-    "user_id": "integer",
-    "username": "username",
     "token": "TOKEN"
 }
 ```
@@ -84,7 +74,7 @@ role_id will be converted to actual id number, and only client or instructor wil
 
 ## **-----CLIENTS-----**
 
-### [GET] /api/users  -- gets list of users
+### [GET] /api/client/classes -- gets list of all available classes
 
 <details>
      <summary>WHAT YOU GET BACK</summary>
@@ -92,17 +82,35 @@ role_id will be converted to actual id number, and only client or instructor wil
 ```JSON
 [
     {
-        "user_id": 1,
-        "username": "RZA"
+        "class_name": "Ride through the Alps",
+        "class_type": "Spin",
+        "class_date": "2021-10-15T07:00:00.000Z",
+        "class_time": "09:00:00",
+        "class_duration": 60,
+        "class_intensity": "medium",
+        "class_registered_clients": 2,
+        "class_max": 35
     },
     {
-        "user_id": 2,
-        "username": "GZA"
+        "class_name": "Relaxing Yoga",
+        "class_type": "Yoga",
+        "class_date": "2021-10-21T07:00:00.000Z",
+        "class_time": "18:00:00",
+        "class_duration": 60,
+        "class_intensity": "low",
+        "class_registered_clients": 3,
+        "class_max": 20
     },
     {
-        "user_id": 3,
-        "username": "ODB"
-    }
+        "class_name": "Bangin' Bhangra",
+        "class_type": "Dance",
+        "class_date": "2021-10-31T07:00:00.000Z",
+        "class_time": "12:00:00",
+        "class_duration": 30,
+        "class_intensity": "high",
+        "class_registered_clients": 0,
+        "class_max": 10
+    },
 ]
 ```
 </details>
