@@ -10,7 +10,8 @@ function getById(class_id){
     return db('classes')
         .where('class_id', class_id)
         .select('class_name', 'class_type', 'class_date', 'class_time', 'class_duration', 'class_intensity', 'class_registered_clients', 'class_max')
-        .orderBy('class_date', 'asc')
+        .orderBy('class_date', 'asc').
+        first();
 }
 
 function getAllReservedClasses(){}
