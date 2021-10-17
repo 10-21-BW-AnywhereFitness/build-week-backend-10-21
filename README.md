@@ -1,6 +1,5 @@
-### [GET] /api/client/classes/:class_id
+
 ### [POST] /api/client/classes/
-### [GET] /api/client/:user_id/classes
 ### [GET] /api/client/:user_id/classes/:class_id
 ### [DELETE] /api/client/:user_id/classes/:class_id
 
@@ -115,51 +114,51 @@ role_id will be converted to actual id number, and only client or instructor wil
 ```
 </details>
 
-### [GET] /api/users/:id  -- gets user by ID
+### [GET] /api/client/classes/:class_id -- gets one class by id
 
 <details>
      <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
 {
-    "user_id": 1,
-    "username": "RZA"
+    "class_name": "Bangin' Bhangra",
+    "class_type": "Dance",
+    "class_date": "2021-10-31T07:00:00.000Z",
+    "class_time": "12:00:00",
+    "class_duration": 30,
+    "class_intensity": "high",
+    "class_registered_clients": 0,
+    "class_max": 10
 }
 ```
 </details>
 
-### [GET] /api/users/:id/potlucks  -- gets all the potlucks a user has been invited to 
+### [GET] /api/client/:user_id/classes -- gets all the classes that the user has a reservation for 
 
 <details>
      <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
-{
-    "user_id": "8",
-    "username": "U-God",
-    "potlucks": [
-        {
-            "attending": 1,
-            "potluck_id": 3,
-            "potluck_name": "MM..FOOD",
-            "organizer": "Ghostface Killah",
-            "potluck_description": "got more cheese than doritos, cheetos, or fritos",
-            "potluck_date": "2021-07-28T06:00:00.000Z",
-            "potluck_time": "07:30:00",
-            "potluck_location": "45 S 5th Ave, New York NY"
-        },
-        {
-            "attending": 1,
-            "potluck_id": 2,
-            "potluck_name": "Yum Yum Food Time",
-            "organizer": "GZA",
-            "potluck_description": "yumyumyumyumyumyumyum",
-            "potluck_date": "2021-08-20T06:00:00.000Z",
-            "potluck_time": "05:00:00",
-            "potluck_location": "1111 E 2222 S, SLC UT"
-        }
-    ]
-}
+[
+    {
+        "class_id": 1,
+        "reservation_id": 1,
+        "class_name": "Bangin' Bhangra",
+        "class_type": "Dance",
+        "class_date": "2021-10-31T07:00:00.000Z",
+        "class_time": "12:00:00",
+        "class_registered_clients": 0
+    },
+    {
+        "class_id": 3,
+        "reservation_id": 4,
+        "class_name": "Ride through the Alps",
+        "class_type": "Spin",
+        "class_date": "2021-10-15T07:00:00.000Z",
+        "class_time": "09:00:00",
+        "class_registered_clients": 2
+    }
+]
 ```
 </details>
 
