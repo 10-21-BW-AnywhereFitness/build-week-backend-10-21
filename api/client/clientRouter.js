@@ -35,11 +35,6 @@ router.post('/classes/:class_id', restricted,checkIfClassExists, checkIfFull, on
         .catch(next)
 })
 
-//[DELETE] /client/classes/:class_id
-router.delete('/classes/:class_id', restricted, checkIfClassExists, (req, res, next) => {
-
-})
-
 //[GET] /client/:user_id/classes
 router.get('/:user_id/classes', restricted, (req, res, next) => {
     ClientClasses.getAllReservedClasses(req.params.user_id)
@@ -47,6 +42,28 @@ router.get('/:user_id/classes', restricted, (req, res, next) => {
             res.status(200).json(allClasses)
         })
         .catch(next)
+})
+//[GET] /client/:user_id/classes/:class_id
+router.get('/:user_id/classes/:class_id', restricted, checkIfClassExists, (req, res, next) => {
+    ClientClasses.getReservedClass(req.params.user_id, req.params.class_id)
+        .then(oneClass => {
+            res.status(200).json(oneClass)
+        })
+        .catch(next)
+})
+
+//[DELETE] /client/:user_id/classes/:class_id
+router.delete('/:user_id/classes/:class_id', restricted, checkIfClassExists, (req, res, next) => {
+    try{
+        ClientClasses.deleteReservation(req.params.user_id, req.params.class_id)
+            .then(() => {
+                res.status(200).json({ message: 'Reservation deleted!'})
+            })
+            .catch(next)
+    }
+    catch(err){
+        next(err);
+    }
 })
 
 module.exports = router;

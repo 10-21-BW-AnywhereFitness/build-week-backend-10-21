@@ -17,8 +17,16 @@ function getById(class_id){
 function getAllReservedClasses(user_id){
     return db('reservations as r')
         .join('classes as c', 'r.class_id', 'c.class_id')
-        .select('c.class_name', 'c.class_type', 'c.class_date', 'c.class_time')
+        .select('c.class_id','r.reservation_id', 'c.class_name', 'c.class_type', 'c.class_date', 'c.class_time', 'c.class_registered_clients')
         .where('r.user_id', user_id)
+}
+
+async function getReservedClass(user_id, class_id){
+    const allClasses = await getAllReservedClasses(user_id);
+    const oneClass = allClasses.filter(c => {
+        return c.class_id === parseInt(class_id)
+    })
+    return oneClass[0];
 }
 
 async function createReservation(user_id, class_id){
@@ -38,14 +46,21 @@ async function createReservation(user_id, class_id){
     .first()
 }
 
-function deleteReservation(user_id, class_id){
-
+async function deleteReservation(user_id, class_id){
+    const classToDelete = await getReservedClass(user_id, class_id)
+    await db('classes')
+        .where('class_id', class_id)
+        .update('class_registered_clients', classToDelete.class_registered_clients - 1)
+    return db('reservations')
+        .where('reservation_id', classToDelete.reservation_id)
+        .del()
 }
 
 module.exports = {
     getAllClasses,
     getById, 
+    getAllReservedClasses,
+    getReservedClass,
     createReservation,
-    deleteReservation,
-    getAllReservedClasses
+    deleteReservation
 };
