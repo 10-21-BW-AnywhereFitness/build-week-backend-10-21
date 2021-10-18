@@ -1,7 +1,3 @@
-
-### [PUT] /api/instructor/:user_id/classes/:class_id
-### [DELETE] /api/instructor/:user_id/classes/:class_id
-
 # ANYWHERE FITNESS BACKEND
 
 ##  https://buildweek-backend-10-21.herokuapp.com/
@@ -173,7 +169,7 @@ role_id will be converted to actual id number, and only client or instructor wil
 </details>
 
 
-### [POST] /api/client/classes/-- creates a new class reservation
+### [POST] /api/client/classes/:class_id-- creates a new class reservation
 <details>
     <summary> WHAT TO SEND </summary>
     Don't need to send anything -- it will just need to be routed properly
@@ -312,85 +308,23 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
 ```
 </details>
 
-<details>
-     <summary>WHAT YOU GET BACK</summary>
-
-```JSON
-{
-    "potluck_id": 2,
-    "potluck_name": "Yum Yum Food Time",
-    "details": {
-        "organizer": 1,
-        "potluck_description": "yumyumyumyumyumyumyum",
-        "potluck_date": "2021-08-20T06:00:00.000Z",
-        "potluck_time": "05:00:00",
-        "potluck_location": "1111 E 2222 S, SLC UT"
-    },
-    "users": [
-        {
-            "user_id": 4,
-            "username": "Method Man",
-            "attending": "attending"
-        },
-        {
-            "user_id": 3,
-            "username": "ODB",
-            "attending": "not attending"
-        }
-    ]
-}
-```
-</details>
-
-### [GET] /api/potlucks/:id/foods  -- gets the foods for a specific potluck 
-
-<details>
-     <summary>WHAT YOU GET BACK</summary>
-
-```JSON
-{
-    "potluck_id": 3,
-    "foods": [
-        {
-            "food_id": 1,
-            "food_name": "Pineapple",
-            "food_description": "part pine, part apple"
-        },
-        {
-            "food_id": 2,
-            "food_name": "Sweet Potatoes",
-            "food_description": "mashed?  fried?  u choose"
-        },
-        {
-            "food_id": 6,
-            "food_name": "Ramen",
-            "food_description": ""
-        }
-    ]
-}
-```
-</details>
 
 
-
-
-
-
-
-
-
-
-
-
-### [POST] /api/potlucks/:id/users  -- adds a user to a potluck
+### [PUT] /api/instructor/:user_id/classes/:class_id -- authenticated instructor updates a pre-existing class's information
 <details>
     <summary> WHAT TO SEND </summary>
 
 ```JSON
 {
-   "potluck_id": 2,
-   "user_id": 8,
-   "attending": 1 //0 for not attending, 1 for attending
+    "class_name": "string", 
+    "class_type": "string", 
+    "class_date": "MM/DD/YYYY must be this format", 
+    "class_time": "HH:MM must be this format", 
+    "class_duration": "integer", 
+    "class_intensity": " 'low', 'medium', or 'high' ", 
+    "class_location": "string",
+    "class_registered_clients": "integer, but will default to 0 if left blank",
+    "class_max": "integer but will default to 5 if left blank"
 }
 ```
 </details>
@@ -399,142 +333,17 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
 
 ```JSON
 {
-    "potluck_id": 2,
-    "potluck_name": "Yum Yum Food Time",
-    "details": {
-        "organizer": 1,
-        "potluck_description": "yumyumyumyumyumyumyum",
-        "potluck_date": "2021-08-20T06:00:00.000Z",
-        "potluck_time": "05:00:00",
-        "potluck_location": "1111 E 2222 S, SLC UT"
-    },
-    "users": [
-        {
-            "user_id": 4,
-            "username": "Method Man",
-            "attending": "attending"
-        },
-        {
-            "user_id": 3,
-            "username": "ODB",
-            "attending": "not attending"
-        },
-        {
-            "user_id": 8,
-            "username": "U-God",
-            "attending": "attending"
-        }
-    ]
-}
-```
-</details>
-
-### [POST] /api/potlucks/:id/foods  -- adds a food item to a potluck
-<details>
-    <summary> WHAT TO SEND </summary>
-
-```JSON
-{
-    "potluck_id": 3,
-    "food_id": 2
-}
-```
-</details>
-<details>
-    <summary> WHAT YOU GET BACK </summary>
-
-```JSON
-{
-    "potluck_id": 3,
-    "foods": [
-        {
-            "food_id": 1,
-            "food_name": "Pineapple",
-            "food_description": "part pine, part apple",
-            "potluck_food_id": 4
-        },
-        {
-            "food_id": 2,
-            "food_name": "Sweet Potatoes",
-            "food_description": "mashed?  fried?  u choose",
-            "potluck_food_id": 18
-        },
-        {
-            "food_id": 5,
-            "food_name": "Masala",
-            "food_description": "better make me sweat",
-            "potluck_food_id": 20
-        }
-    ]
-}
-```
-</details>
-
-
-### [POST] /api/potlucks  -- creates a new potluck
-<details>
-    <summary> WHAT TO SEND </summary>
-
-```JSON
-{
-    "potluck_name": "string",
-    "potluck_description": "optional string",
-    "potluck_date": "2021-07-28  must be this format",
-    "potluck_time": "12:00:00 must be this format",
-    "potluck_location": "string",
-    "organizer": "integer"
-
-}
-```
-</details>
-<details>
-    <summary> WHAT YOU GET BACK </summary>
-
-```JSON
-{
-    "potluck_id": 3,
-    "potluck_name": "MM..FOOD",
-    "details": {
-        "organizer": "Raekwon",
-        "potluck_description": "got more cheese than doritos, cheetos, or fritos",
-        "potluck_date": "2021-07-28T06:00:00.000Z",
-        "potluck_time": "07:30:00",
-        "potluck_location": "45 S 5th Ave, New York NY"
-    }
-}
-```
-</details>
-
-### [PUT] /api/potlucks/:id  -- updates an existing potluck
-<details>
-    <summary> WHAT TO SEND </summary>
-
-```JSON
-{
-    "potluck_name": "string",
-    "potluck_description": "optional string",
-    "potluck_date": "2021-07-28  must be this format",
-    "potluck_time": "12:00:00 must be this format",
-    "potluck_location": "string",
-    "organizer": "integer"
-
-}
-```
-</details>
-<details>
-    <summary> WHAT YOU GET BACK </summary>
-
-```JSON
-{
-    "potluck_id": 3,
-    "potluck_name": "MM..FOOD",
-    "details": {
-        "organizer": "Raekwon",
-        "potluck_description": "got more cheese than doritos, cheetos, or fritos",
-        "potluck_date": "2021-07-28T06:00:00.000Z",
-        "potluck_time": "07:30:00",
-        "potluck_location": "45 S 5th Ave, New York NY"
-    }
+    "user_id": 3,
+    "class_id": 6,
+    "class_name": "INSANITY",
+    "class_type": "HIIT",
+    "class_date": "2021-10-31T07:00:00.000Z",
+    "class_time": "09:00:00",
+    "class_duration": 30,
+    "class_intensity": "high",
+    "class_location": "home",
+    "class_registered_clients": 2,
+    "class_max": 5
 }
 ```
 </details>
@@ -542,113 +351,15 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
 
 
 
-### [DELETE] /api/potlucks/:id  -- delete existing potluck
+### [DELETE] /api/instructor/:user_id/classes/:class_id -- delete existing class
 
 <details>
     <summary> WHAT YOU GET BACK </summary>
 
 ```JSON
 {
-    "potluck_id": 3,
-    "potluck_name": "MM..FOOD",
-    "details": {
-        "organizer": "Raekwon",
-        "potluck_description": "got more cheese than doritos, cheetos, or fritos",
-        "potluck_date": "2021-07-28T06:00:00.000Z",
-        "potluck_time": "07:30:00",
-        "potluck_location": "45 S 5th Ave, New York NY"
-    }
+    "message": "Class successfully deleted!"
 }
-```
-</details>
-
-### [DELETE] /api/potlucks/:potluck_food_id/foods  -- delete existing food item in a potluck
-
-<details>
-    <summary> WHAT YOU GET BACK </summary>
-
-```JSON
-"successfully removed item"
-```
-</details>
-
-## **-----FOODS-----**
-
-### [GET] /api/foods  -- get an array of all foods
-
-<details>
-    <summary> WHAT YOU GET BACK </summary>
-
-```JSON
-[
-    {
-        "food_id": 1,
-        "food_name": "Pineapple",
-        "food_description": "part pine, part apple"
-    },
-    {
-        "food_id": 2,
-        "food_name": "Sweet Potatoes",
-        "food_description": "mashed?  fried?  u choose"
-    },
-    {
-        "food_id": 3,
-        "food_name": "Pizza",
-        "food_description": "Veeeeegan pls"
-    }
-]
-```
-</details>
-
-### [GET] /api/foods/:id  -- gets food by ID
-
-<details>
-    <summary> WHAT YOU GET BACK </summary>
-
-```JSON
-{
-    "food_id": 1,
-    "food_name": "Pineapple",
-    "food_description": "part pine, part apple"
-}
-```
-</details>
-
-
-### [PUT] /api/foods/:id  -- update existing food item
-
-<details>
-    <summary> WHAT TO SEND </summary>
-
-```JSON
-{
-    "food_name": "Fajitas",
-    "food_description": " optional string"
-}
-```
-</details>
-<details>
-    <summary> WHAT YOU GET BACK </summary>
-
-```JSON
-{
-    "food_id": 8,
-    "food_name": "Fajitas",
-    "food_description": "no description yet"
-}
-```
-</details>
-
-### [DELETE] /api/foods/:id  -- delete existing food item
-
-<details>
-    <summary> WHAT YOU GET BACK </summary>
-
-```JSON
-{
-    "food_id": 8,
-    "food_name": "Masala",
-    "food_description": "no description yet"
 }
 ```
 </details>
