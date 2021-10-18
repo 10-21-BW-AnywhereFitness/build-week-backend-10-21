@@ -21,7 +21,7 @@ router.get("/classes", restricted, (req, res, next) => {
 //[GET]/client/classes/:type || class_time || duration || intensity_level || class_location
 
 //[GET] /client/classes/:class_id
-router.get("/classes/:class_id", checkIfClassExists, (req, res, next) => {
+router.get("/classes/:class_id", restricted, checkIfClassExists, (req, res, next) => {
   ClientClasses.getById(req.params.class_id)
     .then((classById) => {
       res.status(200).json(classById);
