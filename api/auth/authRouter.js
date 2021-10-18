@@ -34,6 +34,7 @@ router.post(
   (req, res, next) => {
     try {
       res.status(200).json({
+        user_id: req.user_id,
         message: `Welcome back ${req.body.username}`,
         token: req.token,
       });

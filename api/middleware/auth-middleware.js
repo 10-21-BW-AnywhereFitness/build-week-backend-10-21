@@ -27,7 +27,7 @@ const only = (role_type) => (req, res, next) => {
     next();
   } else {
     next({
-      status: 403,
+      status: 401,
       message: "You do not have the correct permissions for that",
     });
   }
@@ -39,6 +39,7 @@ const checkUsernameExists = async (req, res, next) => {
   if (!validUsername) {
     next({ status: 404, message: "That username doesn't exist" });
   } else {
+    req.user_id = validUsername.user_id
     next();
   }
 };
