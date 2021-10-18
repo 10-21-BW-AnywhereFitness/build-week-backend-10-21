@@ -2,7 +2,6 @@ const db = require("./../data/db-config");
 const {
   validateClassSchema,
 } = require("./../validation-schema/yup-class_validation");
-const Instructors = require("./../models/instructors-model");
 
 async function checkClassExists(req, res, next) {
   const exists = await db("classes")

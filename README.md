@@ -2,8 +2,6 @@
 
 ##  https://buildweek-backend-10-21.herokuapp.com/
 
-
-
 ### ----------------  ENDPOINTS  -------------------- 
 
 ### **-----LOGIN and REGISTER-----**
@@ -207,7 +205,7 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
 ```
 </details>
 
-## **-----INSTRUCTOR (AUTH NEEDED)-----**
+## **-----INSTRUCTORS (AUTH NEEDED)-----**
 
 ### [GET] /api/instructor/:user_id/classes -- gets all the classes that the instructor is teaching
 
@@ -348,14 +346,11 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
 ```
 </details>
 
-
-
-
 ### [DELETE] /api/instructor/:user_id/classes/:class_id -- delete existing class
 
 <details>
     <summary> WHAT YOU GET BACK </summary>
-
+    will also delete all reservations that people have made for this class.
 ```JSON
 {
     "message": "Class successfully deleted!"

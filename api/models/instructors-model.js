@@ -47,18 +47,12 @@ async function addClass(newClass) {
 }
 
 async function updateClass(class_id, update) {
-    await db('classes')
-        .update(update)
-        .where('class_id', class_id)
-    return getClass(update.user_id, class_id )
+  await db("classes").update(update).where("class_id", class_id);
+  return getClass(update.user_id, class_id);
 }
 
 async function deleteClass(user_id, class_id) {
-    // const classToDelete = await getClass(user_id, class_id);
-    
-    return db('classes')
-        .where('class_id', class_id)
-        .del()
+  return db("classes").where("class_id", class_id).del();
 }
 
 module.exports = {
