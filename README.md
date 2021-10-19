@@ -41,6 +41,7 @@ role_id will be converted to actual id number, and only client or instructor wil
 
 ```JSON
 {
+    "user_id": "integer",
     "username": "string",
     "password": "string"
 }
