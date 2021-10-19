@@ -13,12 +13,12 @@ afterAll(async () => {
   await db.destroy()
 })
 
-it('sanity check', () => {
-  expect(true).not.toBe(false)
-})
-
-describe('server.js', () => {
-  it('is the correct testing environment', async () => {
-    expect(process.env.NODE_ENV).toBe('testing')
+describe('placeholder', () => {
+    it.todo('placeholder')
+    it.todo('placeholder')
+    it.todo('placeholder')
+    it.todo('placeholder')
+    it.todo('placeholder')
+    it.todo('placeholder')
   })
-})
+  
