@@ -57,6 +57,43 @@ role_id will be converted to actual id number, and only client or instructor wil
 ```
 </details>
 
+## **-----CLIENTS (NO AUTH NEEDED)-----**
+
+### [GET] / client/public/classes (no auth)
+
+<details>
+     <summary>WHAT YOU GET BACK</summary>
+
+```JSON
+[
+    {
+        "class_name": "Ride through the Alps",
+        "class_date": "2021-10-15T07:00:00.000Z",
+        "class_time": "09:00:00",
+        "class_description": "Imagine bike travel but better"
+    },
+    {
+        "class_name": "Relaxing Yoga",
+        "class_date": "2021-10-21T07:00:00.000Z",
+        "class_time": "18:00:00",
+        "class_description": "Namaste"
+    },
+    {
+        "class_name": "Bangin' Bhangra",
+        "class_date": "2021-10-31T07:00:00.000Z",
+        "class_time": "12:00:00",
+        "class_description": "Bollywood dancing!"
+    },
+    {
+        "class_name": "test",
+        "class_date": "2021-10-31T07:00:00.000Z",
+        "class_time": "09:00:00",
+        "class_description": "BLAH BLAH BLAH"
+    }
+]
+```
+</details>
+
 ## **-----CLIENTS (AUTH NEEDED)-----**
 
 ### [GET] /api/client/classes -- gets list of all available classes
@@ -72,6 +109,7 @@ role_id will be converted to actual id number, and only client or instructor wil
         "class_date": "2021-10-15T07:00:00.000Z",
         "class_time": "09:00:00",
         "class_duration": 60,
+        "class_description": "Imagine bike travel but better",
         "class_intensity": "medium",
         "class_registered_clients": 2,
         "class_max": 35
@@ -82,6 +120,7 @@ role_id will be converted to actual id number, and only client or instructor wil
         "class_date": "2021-10-21T07:00:00.000Z",
         "class_time": "18:00:00",
         "class_duration": 60,
+        "class_description": "Namaste",
         "class_intensity": "low",
         "class_registered_clients": 3,
         "class_max": 20
@@ -92,10 +131,22 @@ role_id will be converted to actual id number, and only client or instructor wil
         "class_date": "2021-10-31T07:00:00.000Z",
         "class_time": "12:00:00",
         "class_duration": 30,
+        "class_description": "Bollywood dancing!",
         "class_intensity": "high",
         "class_registered_clients": 0,
         "class_max": 10
     },
+    {
+        "class_name": "test",
+        "class_type": "running",
+        "class_date": "2021-10-31T07:00:00.000Z",
+        "class_time": "09:00:00",
+        "class_duration": 30,
+        "class_description": "BLAH BLAH BLAH",
+        "class_intensity": "high",
+        "class_registered_clients": 2,
+        "class_max": 5
+    }
 ]
 ```
 </details>
@@ -272,6 +323,8 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     - class_time was not able to be validated, but it needs to be included
     - class_intensity needs to be one of the below words, all lowercase
 
+    update: Added the ability to add a description (which is optional)
+
 ```JSON
 {
     "class_name": "string", 
@@ -279,6 +332,7 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     "class_date": "MM/DD/YYYY", 
     "class_time": "HH:MM", 
     "class_duration": "integer", 
+    "class_description": "string (optional)",
     "class_intensity": " 'low', 'medium', or 'high' ", 
     "class_location": "string",
     "class_registered_clients": "integer, but will default to 0 if left blank",

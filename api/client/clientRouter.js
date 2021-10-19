@@ -9,16 +9,24 @@ const {
 } = require("./../middleware/reservations-middleware");
 const ClientClasses = require("./../models/client_classes-model");
 
+//[GET] / client/public/classes (no auth)
+router.get('/public/classes', (req, res, next) => {
+  ClientClasses.getAllClassesPublic()
+    .then(classes => {
+      res.status(200).json(classes);
+    })
+    .catch(next);
+})
+
+
 //[GET] /client/classes (auth client)
 router.get("/classes", restricted, (req, res, next) => {
-  ClientClasses.getAllClasses()
+  ClientClasses.getAllClassesAuth()
     .then((classes) => {
       res.status(200).json(classes);
     })
     .catch(next);
 });
-
-//[GET]/client/classes/:type || class_time || duration || intensity_level || class_location
 
 //[GET] /client/classes/:class_id
 router.get("/classes/:class_id", restricted, checkIfClassExists, (req, res, next) => {

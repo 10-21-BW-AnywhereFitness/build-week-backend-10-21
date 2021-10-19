@@ -1,6 +1,17 @@
 const db = require("./../data/db-config");
 
-async function getAllClasses() {
+async function getAllClassesPublic() {
+  return db("classes")
+    .select(
+      "class_name",
+      "class_date",
+      "class_time",
+      "class_description",
+    )
+    .orderBy("class_date", "asc");
+}
+
+async function getAllClassesAuth() {
   return db("classes")
     .select(
       "class_name",
@@ -8,6 +19,7 @@ async function getAllClasses() {
       "class_date",
       "class_time",
       "class_duration",
+      "class_description",
       "class_intensity",
       "class_registered_clients",
       "class_max"
@@ -102,7 +114,8 @@ async function deleteReservation(user_id, class_id) {
 }
 
 module.exports = {
-  getAllClasses,
+  getAllClassesPublic,
+  getAllClassesAuth,
   getById,
   getAllReservedClasses,
   getReservedClass,

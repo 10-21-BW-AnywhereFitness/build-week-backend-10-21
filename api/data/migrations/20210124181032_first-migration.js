@@ -8,7 +8,6 @@ exports.up = async (knex) => {
       users.increments("user_id");
       users.string("username", 200).notNullable().unique();
       users.string("password", 200).notNullable();
-      // users.boolean('instructor_auth')
       users
         .integer("role_id")
         .unsigned()
@@ -24,6 +23,7 @@ exports.up = async (knex) => {
       classes.string("class_type").notNullable();
       classes.date("class_date").notNullable();
       classes.time("class_time").notNullable();
+      classes.string("class_description")
       classes.integer("class_duration").notNullable();
       classes.string("class_intensity").notNullable();
       classes.string("class_location").notNullable();
