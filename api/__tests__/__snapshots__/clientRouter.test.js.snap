@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[GET] /client/:user_id/classes returns data in the correct shape 1`] = `
+Array [
+  Object {
+    "class_date": "2021-10-21T07:00:00.000Z",
+    "class_id": 2,
+    "class_name": "Relaxing Yoga",
+    "class_registered_clients": 3,
+    "class_time": "18:00:00",
+    "class_type": "Yoga",
+    "reservation_id": 2,
+  },
+  Object {
+    "class_date": "2021-10-15T07:00:00.000Z",
+    "class_id": 3,
+    "class_name": "Ride through the Alps",
+    "class_registered_clients": 2,
+    "class_time": "09:00:00",
+    "class_type": "Spin",
+    "reservation_id": 3,
+  },
+]
+`;
+
+exports[`[GET] /client/classes (auth client) returns the correct shape of data 1`] = `
+Array [
+  Object {
+    "class_date": "2021-10-15T07:00:00.000Z",
+    "class_description": "Imagine bike travel but better",
+    "class_duration": 60,
+    "class_intensity": "medium",
+    "class_max": 35,
+    "class_name": "Ride through the Alps",
+    "class_registered_clients": 2,
+    "class_time": "09:00:00",
+    "class_type": "Spin",
+  },
+  Object {
+    "class_date": "2021-10-15T07:00:00.000Z",
+    "class_description": "Now let's walk it out",
+    "class_duration": 60,
+    "class_intensity": "medium",
+    "class_max": 3,
+    "class_name": "Walk it Out",
+    "class_registered_clients": 3,
+    "class_time": "09:00:00",
+    "class_type": "Aerobics",
+  },
+  Object {
+    "class_date": "2021-10-21T07:00:00.000Z",
+    "class_description": "Namaste",
+    "class_duration": 60,
+    "class_intensity": "low",
+    "class_max": 20,
+    "class_name": "Relaxing Yoga",
+    "class_registered_clients": 3,
+    "class_time": "18:00:00",
+    "class_type": "Yoga",
+  },
+  Object {
+    "class_date": "2021-10-31T07:00:00.000Z",
+    "class_description": "Bollywood dancing!",
+    "class_duration": 30,
+    "class_intensity": "high",
+    "class_max": 10,
+    "class_name": "Bangin' Bhangra",
+    "class_registered_clients": 0,
+    "class_time": "12:00:00",
+    "class_type": "Dance",
+  },
+]
+`;
+
+exports[`[GET] /client/classes/:class_id returns correct shape of data 1`] = `
+Object {
+  "class_date": "2021-10-21T07:00:00.000Z",
+  "class_duration": 60,
+  "class_intensity": "low",
+  "class_max": 20,
+  "class_name": "Relaxing Yoga",
+  "class_registered_clients": 3,
+  "class_time": "18:00:00",
+  "class_type": "Yoga",
+}
+`;

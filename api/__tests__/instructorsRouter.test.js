@@ -13,10 +13,6 @@ beforeAll(async () => {
     await db.destroy()
   })
   
-  it('sanity check', () => {
-    expect(true).not.toBe(false)
-  })
-  
   describe('placeholder', () => {
     it.todo('placeholder')
     it.todo('placeholder')
