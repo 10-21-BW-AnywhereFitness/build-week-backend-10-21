@@ -61,12 +61,17 @@ describe("[GET] /client/classes/:class_id", () => {
 });
 
 describe("[POST] /client/classes/:class_id", () => {
+  let class1
   let res;
+  
   beforeEach(async () => {
+    class1 = await db('classes').where('class_id', 1).first()
+
     res = await request(server)
       .post("/api/client/classes/1")
       .send()
       .set("Authorization", token);
+
   });
   it("returns status 201 for a successful reservation", () => {
     expect(res.status).toBe(201)
@@ -103,9 +108,20 @@ describe("[POST] /client/classes/:class_id", () => {
     .post("/api/client/classes/4")
     .send()
     .set("Authorization", token);
+
+    expect(fullClass.status).toBe(401)
+    expect(fullClass.body.message).toBe("Sorry, this class is full")
   });
-  it.todo("responds with a confirmation message");
-  it.todo("increments the number of class_registered_clients by 1");
+  it("responds with class information", () => {
+    expect(res.body).toBeDefined()
+    expect(res.body).toMatchSnapshot()
+  });
+  it("increments the number of class_registered_clients by 1", async () => {
+    expect(class1.class_registered_clients).toBe(0)
+
+    const updatedClass = await db('classes').where('class_id', 1).first()
+    expect(updatedClass.class_registered_clients).toBe(1)
+  });
 });
 
 describe("[GET] /client/:user_id/classes", () => {

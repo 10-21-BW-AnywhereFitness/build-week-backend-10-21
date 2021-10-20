@@ -84,3 +84,15 @@ Object {
   "class_type": "Yoga",
 }
 `;
+
+exports[`[POST] /client/classes/:class_id responds with class information 1`] = `
+Object {
+  "class_date": "2021-10-31T07:00:00.000Z",
+  "class_duration": 30,
+  "class_max": 10,
+  "class_name": "Bangin' Bhangra",
+  "class_registered_clients": 1,
+  "class_time": "12:00:00",
+  "class_type": "Dance",
+}
+`;
