@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[GET] /api/client/public/classes (no auth) returns the data in the correct shape made for public requests 1`] = `
+Array [
+  Object {
+    "class_date": "2021-10-15T07:00:00.000Z",
+    "class_description": "Imagine bike travel but better",
+    "class_name": "Ride through the Alps",
+    "class_time": "09:00:00",
+  },
+  Object {
+    "class_date": "2021-10-15T07:00:00.000Z",
+    "class_description": "Now let's walk it out",
+    "class_name": "Walk it Out",
+    "class_time": "09:00:00",
+  },
+  Object {
+    "class_date": "2021-10-21T07:00:00.000Z",
+    "class_description": "Namaste",
+    "class_name": "Relaxing Yoga",
+    "class_time": "18:00:00",
+  },
+  Object {
+    "class_date": "2021-10-31T07:00:00.000Z",
+    "class_description": "Bollywood dancing!",
+    "class_name": "Bangin' Bhangra",
+    "class_time": "12:00:00",
+  },
+]
+`;

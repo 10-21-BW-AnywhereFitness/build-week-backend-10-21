@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[POST]  /api/auth/register responds with newly created user 1`] = `
+Object {
+  "role_id": 2,
+  "user_id": 5,
+  "username": "taco",
+}
+`;

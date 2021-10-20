@@ -39,5 +39,18 @@ exports.seed = function (knex, Promise) {
       class_max: 35,
       user_id: 4,
     },
+    {
+      class_name: "Walk it Out",
+      class_type: "Aerobics",
+      class_date: "2021-10-15",
+      class_time: "9:00:00",
+      class_description: "Now let's walk it out",
+      class_duration: 60,
+      class_intensity: "medium",
+      class_location: "San Francisco",
+      class_registered_clients: 3,
+      class_max: 3,
+      user_id: 4,
+    },
   ]);
 };
