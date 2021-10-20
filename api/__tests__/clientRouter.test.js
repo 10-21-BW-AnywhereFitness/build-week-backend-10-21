@@ -152,26 +152,60 @@ describe("[GET] /client/:user_id/classes/:class_id", () => {
   let res;
   beforeEach(async () => {
     res = await request(server)
-      .get("/api/client/2/classes/1")
+      .get("/api/client/2/classes/2")
       .set("Authorization", token);
     });
-  it.todo("returns status 200");
-  it.todo("returns 1 class");
-  it.todo("returns correct class by class_id");
-  it.todo("data is in the correct shape");
+  it("returns status 200", () => {
+    expect(res.status).toBe(200)
+  });
+  it("returns 1 class", () => {
+    expect(res.body).toMatchObject({
+      "class_id": 2,
+      "reservation_id": 2,
+      "class_name": "Relaxing Yoga",
+      "class_type": "Yoga",
+      "class_date": "2021-10-21T07:00:00.000Z",
+      "class_time": "18:00:00",
+      "class_registered_clients": 3
+    })
+  });
+  it("returns correct class by class_id", () => {
+    expect(res.body.class_id).toBe(2)
+  });
+  it("data is in the correct shape", () => {
+    expect(res.body).toMatchSnapshot()
+  });
+  it("returns a 404 if not registered for that class", async () => {
+    const lookForClass1 = await request(server)
+    .get("/api/client/2/classes/1")
+    .set("Authorization", token);
+    expect(lookForClass1.status).toBe(404)
+  })
 });
 
 describe("[DELETE] /client/:user_id/classes/:class_id", () => {
+  let registeredClasses;
   let res;
   beforeEach(async () => {
+    registeredClasses = await db('reservations as r').join('classes as c', 'r.class_id', 'c.class_id').where('r.user_id', 2)
+
     res = await request(server)
-      .delete("/api/client/2/classes/1")
+      .delete("/api/client/2/classes/2")
       .set("Authorization", token);
     });
 
-  it.todo("returns status 200");
-  it.todo("user's number of registered classes is reduced by 1");
-  it.todo("returns deletion success message");
+  it("returns status 200", () => {
+    expect(res.status).toBe(200)
+  });
+  it("returns deletion success message", () => {
+    expect(res.body.message).toBe("Reservation deleted!")
+  });
+  it("user's number of registered classes is reduced by 1", async() => {
+    const newRegisteredClasses = await db('reservations as r').join('classes as c', 'r.class_id', 'c.class_id').where('r.user_id', 2)
+    expect(registeredClasses).toHaveLength(2)
+    expect(newRegisteredClasses).toHaveLength(1)
+
+  });
   it.todo("class's class_registered_clients is decremented by 1");
   it.todo("unable to route to class with deleted class_id");
 });
