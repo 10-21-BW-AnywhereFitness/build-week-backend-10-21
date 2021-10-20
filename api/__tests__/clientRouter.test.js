@@ -98,7 +98,12 @@ describe("[POST] /client/classes/:class_id", () => {
     expect(res2.body.message).toBe("You have already registered for this class")
     expect(reservations).toHaveLength(5)
   });
-  it.todo("does not allow user to register for class if full");
+  it("does not allow user to register for class if full", async () => {
+    const fullClass = await request(server)
+    .post("/api/client/classes/4")
+    .send()
+    .set("Authorization", token);
+  });
   it.todo("responds with a confirmation message");
   it.todo("increments the number of class_registered_clients by 1");
 });
