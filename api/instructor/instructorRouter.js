@@ -22,7 +22,7 @@ router.get(
   }
 );
 
-//[GET] /api/instructor/:user_id/classes/
+//[GET] /api/instructor/:user_id/classes/:class_id
 router.get(
   "/:user_id/classes/:class_id",
   restricted,
