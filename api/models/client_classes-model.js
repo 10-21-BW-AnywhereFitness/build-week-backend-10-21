@@ -48,7 +48,7 @@ function getAllReservedClasses(user_id) {
   return db("reservations as r")
     .join("classes as c", "r.class_id", "c.class_id")
     .select(
-      // "r.user_id",
+      "r.user_id",
       "r.class_id",
       "r.reservation_id",
       "c.class_name",
