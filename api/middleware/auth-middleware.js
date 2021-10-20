@@ -40,6 +40,7 @@ const checkUsernameExists = async (req, res, next) => {
     next({ status: 404, message: "That username doesn't exist" });
   } else {
     req.user_id = validUsername.user_id
+    req.role_id = validUsername.role_id
     next();
   }
 };
