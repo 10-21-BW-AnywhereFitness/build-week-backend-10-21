@@ -184,9 +184,12 @@ describe("[GET] /client/:user_id/classes/:class_id", () => {
 });
 
 describe("[DELETE] /client/:user_id/classes/:class_id", () => {
+  let clients_registered
   let registeredClasses;
   let res;
   beforeEach(async () => {
+    clients_registered = await db('classes').where('class_id', 2).first()
+
     registeredClasses = await db('reservations as r').join('classes as c', 'r.class_id', 'c.class_id').where('r.user_id', 2)
 
     res = await request(server)
@@ -204,8 +207,17 @@ describe("[DELETE] /client/:user_id/classes/:class_id", () => {
     const newRegisteredClasses = await db('reservations as r').join('classes as c', 'r.class_id', 'c.class_id').where('r.user_id', 2)
     expect(registeredClasses).toHaveLength(2)
     expect(newRegisteredClasses).toHaveLength(1)
-
   });
-  it.todo("class's class_registered_clients is decremented by 1");
-  it.todo("unable to route to class with deleted class_id");
+  it("class's class_registered_clients is decremented by 1", async () => {
+    const newClients_registered = await db('classes').where('class_id', 2).first()
+    expect(clients_registered.class_registered_clients).toBe(3)
+    expect(newClients_registered.class_registered_clients).toBe(2)
+  });
+  it("unable to route to reservation for a user who deleted that class by class_id", async () => {
+    const noReservation = await request(server)
+    .get("/api/client/2/classes/2")
+    .set("Authorization", token);
+    expect(noReservation.status).toBe(404)
+    expect(noReservation.body.message).toBe("That reservation doesn't exist")
+  });
 });
