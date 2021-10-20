@@ -60,7 +60,7 @@ role_id will be converted to actual id number, and only client or instructor wil
 
 ## **-----CLIENTS (NO AUTH NEEDED)-----**
 
-### [GET] / client/public/classes (no auth)
+### [GET] /api/client/public/classes (no auth)
 
 <details>
      <summary>WHAT YOU GET BACK</summary>
