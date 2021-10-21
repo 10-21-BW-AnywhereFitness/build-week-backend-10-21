@@ -14,6 +14,7 @@ async function getAllClassesPublic() {
 async function getAllClassesAuth() {
   return db("classes")
     .select(
+      "class_id",
       "class_name",
       "class_type",
       "class_date",
@@ -31,6 +32,7 @@ function getById(class_id) {
   return db("classes")
     .where("class_id", class_id)
     .select(
+      "class_id",
       "class_name",
       "class_type",
       "class_date",
