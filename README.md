@@ -106,6 +106,7 @@ role_id will be converted to actual id number, and only client or instructor wil
 ```JSON
 [
     {
+        "class_id": 1,
         "class_name": "Ride through the Alps",
         "class_type": "Spin",
         "class_date": "2021-10-15T07:00:00.000Z",
@@ -117,6 +118,7 @@ role_id will be converted to actual id number, and only client or instructor wil
         "class_max": 35
     },
     {
+        "class_id": 2,
         "class_name": "Relaxing Yoga",
         "class_type": "Yoga",
         "class_date": "2021-10-21T07:00:00.000Z",
@@ -128,6 +130,7 @@ role_id will be converted to actual id number, and only client or instructor wil
         "class_max": 20
     },
     {
+        "class_id": 3,
         "class_name": "Bangin' Bhangra",
         "class_type": "Dance",
         "class_date": "2021-10-31T07:00:00.000Z",
@@ -139,6 +142,7 @@ role_id will be converted to actual id number, and only client or instructor wil
         "class_max": 10
     },
     {
+        "class_id": 4,
         "class_name": "test",
         "class_type": "running",
         "class_date": "2021-10-31T07:00:00.000Z",
@@ -160,6 +164,7 @@ role_id will be converted to actual id number, and only client or instructor wil
 
 ```JSON
 {
+    "class_id": 1,
     "class_name": "Bangin' Bhangra",
     "class_type": "Dance",
     "class_date": "2021-10-31T07:00:00.000Z",
