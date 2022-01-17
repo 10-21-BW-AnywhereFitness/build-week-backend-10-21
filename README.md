@@ -8,7 +8,7 @@
 
 ### [POST]  /api/auth/register  -- creates a new user
 
-<details>
+
 role_id will be converted to actual id number, and only client or instructor will be accepted (all lowercase)
     <summary>WHAT TO SEND </summary>
     
