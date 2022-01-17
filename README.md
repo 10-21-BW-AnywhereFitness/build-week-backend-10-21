@@ -402,6 +402,5 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
 {
     "message": "Class successfully deleted!"
 }
-}
 ```
 
