@@ -20,9 +20,6 @@ role_id will be converted to actual id number, and only client or instructor wil
 }
 ```
 
-</details>
-
-<details>
     <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
@@ -32,7 +29,6 @@ role_id will be converted to actual id number, and only client or instructor wil
     "role_id": "integer"
 }
 ```
-</details>
 
 
 ### [POST]  /api/auth/login  -- logs in an existing user
