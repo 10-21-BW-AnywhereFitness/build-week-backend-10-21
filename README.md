@@ -32,7 +32,7 @@ role_id will be converted to actual id number, and only client or instructor wil
 
 
 ### [POST]  /api/auth/login  -- logs in an existing user
-<details>
+
     <summary> WHAT TO SEND </summary>
 
 ```JSON
@@ -41,8 +41,7 @@ role_id will be converted to actual id number, and only client or instructor wil
     "password": "string"
 }
 ```
-</details>
-<details>
+
     <summary> WHAT YOU GET BACK </summary>
 
 ```JSON
@@ -53,13 +52,12 @@ role_id will be converted to actual id number, and only client or instructor wil
     "token": "TOKEN"
 }
 ```
-</details>
 
 ## **-----CLIENTS (NO AUTH NEEDED)-----**
 
 ### [GET] /api/client/public/classes (no auth)
 
-<details>
+
      <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
@@ -90,13 +88,13 @@ role_id will be converted to actual id number, and only client or instructor wil
     }
 ]
 ```
-</details>
+
 
 ## **-----CLIENTS (AUTH NEEDED)-----**
 
 ### [GET] /api/client/classes -- gets list of all available classes
 
-<details>
+
      <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
@@ -151,11 +149,10 @@ role_id will be converted to actual id number, and only client or instructor wil
     }
 ]
 ```
-</details>
+
 
 ### [GET] /api/client/classes/:class_id -- gets one class by id
 
-<details>
      <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
@@ -171,11 +168,10 @@ role_id will be converted to actual id number, and only client or instructor wil
     "class_max": 10
 }
 ```
-</details>
 
 ### [GET] /api/client/:user_id/classes -- gets all the classes that the user has a reservation for 
 
-<details>
+
      <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
@@ -200,11 +196,11 @@ role_id will be converted to actual id number, and only client or instructor wil
     }
 ]
 ```
-</details>
+
 
 ### [GET] /api/client/:user_id/classes/:class_id -- get one class that the user has a reservation for by its class_id
 
-<details>
+
      <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
@@ -218,15 +214,13 @@ role_id will be converted to actual id number, and only client or instructor wil
     "class_registered_clients": 2
 }
 ```
-</details>
+
 
 
 ### [POST] /api/client/classes/:class_id-- creates a new class reservation
-<details>
     <summary> WHAT TO SEND </summary>
     Don't need to send anything -- it will just need to be routed properly
-</details>
-<details>
+
     <summary> WHAT YOU GET BACK </summary>
 class_registered_clients will increment by 1 each time a NEW CLIENT makes a class reservation. Each user will only be able to register for any 1 class once unless they delete their reservation and make a new one
 
@@ -241,14 +235,13 @@ class_registered_clients will increment by 1 each time a NEW CLIENT makes a clas
     "class_max": 5
 }
 ```
-</details>
+
 
 ###  [DELETE] /api/client/:user_id/classes/:class_id -- deletes a class reservation for that specific user and updates the class_registered_clients key
-<details>
+
     <summary> WHAT TO SEND </summary>
     Don't need to send anything -- it will just need to be routed properly
-</details>
-<details>
+
     <summary> WHAT YOU GET BACK </summary>
 class_registered_clients will decrement by 1 each time a user deletes their preexisting class reservation.
 
@@ -257,13 +250,12 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     "message": "Reservation deleted!"
 }
 ```
-</details>
+
 
 ## **-----INSTRUCTORS (AUTH NEEDED)-----**
 
 ### [GET] /api/instructor/:user_id/classes -- gets all the classes that the instructor is teaching
 
-<details>
     <summary> WHAT YOU GET BACK </summary>
 
 ```JSON
@@ -296,11 +288,11 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     }
 ]
 ```
-</details>
+
 
 ### [GET] /api/instructor/:user_id/classes/:class_id -- get 1 particular class a logged-in instructor wants to look at by class_id
 
-<details>
+
      <summary>WHAT YOU GET BACK</summary>
 
 ```JSON
@@ -318,10 +310,10 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     "class_max": 35
 }
 ```
-</details>
+
 
 ### [POST] /api/instructor/:user_id/classes/-- authenticated instructor creates new class
-<details>
+
     <summary> WHAT TO SEND </summary>
     - class_time was not able to be validated, but it needs to be included
     - class_intensity needs to be one of the below words, all lowercase
@@ -342,8 +334,7 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     "class_max": "integer but will default to 5 if left blank"
 } 
 ```
-</details>
-<details>
+
     <summary> WHAT YOU GET BACK </summary>
 
 ```JSON
@@ -361,12 +352,12 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     "class_max": "integer"
 }
 ```
-</details>
+
 
 
 
 ### [PUT] /api/instructor/:user_id/classes/:class_id -- authenticated instructor updates a pre-existing class's information
-<details>
+
     <summary> WHAT TO SEND </summary>
 
 ```JSON
@@ -382,8 +373,7 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     "class_max": "integer but will default to 5 if left blank"
 }
 ```
-</details>
-<details>
+
     <summary> WHAT YOU GET BACK </summary>
 
 ```JSON
@@ -401,11 +391,11 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
     "class_max": 5
 }
 ```
-</details>
+
 
 ### [DELETE] /api/instructor/:user_id/classes/:class_id -- delete existing class
 
-<details>
+
     <summary> WHAT YOU GET BACK </summary>
     will also delete all reservations that people have made for this class.
 ```JSON
@@ -414,4 +404,4 @@ class_registered_clients will decrement by 1 each time a user deletes their pree
 }
 }
 ```
-</details>
+
