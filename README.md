@@ -6,44 +6,44 @@
 #### Classes:
 ```JSON
 {
-    class_id: int, 
-    class_name: string,
-    class_type: string,
-    class_date: date,
-    class_time: time,
-    class_description: string,
-    class_intensity: string,
-    class_location: string,
-    class_registered_clients: int,
-    class_max: int,
-    user_id (FK): int
+    "class_id": "int", 
+    "class_name": "string",
+    "class_type": "string",
+    "class_date": "date",
+    "class_time": "time",
+    "class_description": "string",
+    "class_intensity": "string",
+    "class_location": "string",
+    "class_registered_clients": "int",
+    "class_max": "int",
+    "user_id (FK)": "int"
 }
 ```
 
 #### Roles:
 ```JSON
 {
-    role_id: int,
-    role_type: string
+    "role_id": "int",
+    "role_type": "string"
 }
 ```
 
 #### Reservations:
 ```JSON
 {
-    reservation_id: int,
-    user_id (FK): int, 
-    class_id (FK): int
+    "reservation_id": "int",
+    "user_id (FK)": "int", 
+    "class_id (FK)": "int"
 }
 ```
 
 #### Users:
 ```JSON
 {
-    user_id: int,
-    username: string,
-    password, string,
-    role_id(FK): int
+    "user_id": "int",
+    "username": "string",
+    "password": "string",
+    "role_id(FK)": "int"
 }
 ```
 
